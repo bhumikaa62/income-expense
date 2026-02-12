@@ -54,12 +54,14 @@ module.exports = {
 
       expensedate: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+       
       },
 
       entrydate: {
         type: Sequelize.DATEONLY,
-        allowNull: false
+        allowNull: false,
+       
       },
 
       bill: {
