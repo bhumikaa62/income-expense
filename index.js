@@ -6,6 +6,12 @@ const webRouter = require('./routers/WebRouter');
 const incomeRouter = require('./routers/IncomeRouter')
 const ExpenseRouter = require('./routers/ExpenseRouter')
 const dashboardRouter = require('./routers/DashboardRouter');
+const incomeCategoryRouter = require("./routers/incomeCategoryRouter");
+const expenseCategoryRouter = require("./routers/expenseCategoryRouter");
+
+
+
+
 
 const server = express();
 server.use(cors());
@@ -15,6 +21,9 @@ server.use("/auth", webRouter)
 server.use("/income",incomeRouter)
 server.use("/expense",ExpenseRouter)
 server.use("/dashboard", dashboardRouter);
+server.use("/income-category", incomeCategoryRouter);
+server.use("/expense-category", expenseCategoryRouter);
+
 
 
 server.listen(8989, () => {

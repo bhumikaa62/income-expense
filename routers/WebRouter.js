@@ -66,9 +66,14 @@ router.post("/login", async (req, res) => {
       )
     }
 
-    const token = generateToken(user.email)
+    const token = generateToken(user)
     return res.json(
-      new ApiResponse(true, "Login Success", token)
+    
+      new ApiResponse(true, "Login Success", {
+        token: token,
+        userId: user.id,       // 🔥 yahi chahiye
+        name: user.name        // optional, display ke liye
+      })
     )
   }
   catch (err) {

@@ -1,26 +1,30 @@
 const jwt = require('jsonwebtoken')
 
-
-const expiry = "10m";
+const expiry = "1h";
 const secret = "bdc5e2b2-9563-4398-874a-7e5e68276750";
 
-function generateToken(email)
+function generateToken(user)   // ✅ parameter change
 {
-    const token = jwt.sign({email},secret,{ expiresIn: expiry });  
+    const token = jwt.sign(
+        {
+            id: user.id,       // ✅ now valid
+            email: user.email
+        },
+        secret,
+        { expiresIn: expiry }
+    );  
+
     return token;    
 }
 
-function verifyToken(token,callback)
+function verifyToken(token, callback)
 {
-    jwt.verify(token,secret,(err,tokenData)=>
-        {
-            if(err)
-                callback(err,null);
-            else
-            {
-                callback(null,tokenData)
-            }
-        })
+    jwt.verify(token, secret, (err, tokenData) => {
+        if (err)
+            callback(err, null);
+        else
+            callback(null, tokenData)
+    })
 }
 
-module.exports = {generateToken,verifyToken}
+module.exports = { generateToken, verifyToken }

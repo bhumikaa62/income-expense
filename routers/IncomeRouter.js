@@ -16,7 +16,7 @@ router.post("/add", async (req, res) => {
         res.json(new ApiResponse(true, "Income added successfully", data));
     } catch (err) {
          console.log(err);
-        res.json(new ApiResponse(false, "Error adding income", err));
+        res.json(new ApiResponse(false, "Error adding income", err.message));
     }
 });
 
