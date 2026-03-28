@@ -24,8 +24,9 @@ server.use("/dashboard", dashboardRouter);
 server.use("/income-category", incomeCategoryRouter);
 server.use("/expense-category", expenseCategoryRouter);
 
+const PORT = process.env.PORT || 8989;
 
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
-server.listen(8989, () => {
-    console.log("server : http://localhost:8989")
-})

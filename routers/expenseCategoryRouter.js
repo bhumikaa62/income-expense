@@ -3,7 +3,7 @@ const { ExpenseCategory } = require("../models");
 const ApiResponse = require("./ApiResponse");
 
 
-// ➕ Add Expense Category
+//  Add Expense Category
 router.post("/add", async (req, res) => {
   try {
     const { expense_category_name } = req.body;
@@ -24,7 +24,7 @@ router.post("/add", async (req, res) => {
 });
 
 
-// 📄 List All Expense Categories
+//  List All Expense Categories
 router.get("/list", async (req, res) => {
   try {
     const data = await ExpenseCategory.findAll({

@@ -3,7 +3,7 @@ const { IncomeCategory } = require("../models");
 const ApiResponse = require("./ApiResponse");
 
 
-// ➕ Add Income Category
+//  Add Income Category
 router.post("/add", async (req, res) => {
   try {
     const { income_source_name } = req.body;
@@ -24,7 +24,7 @@ router.post("/add", async (req, res) => {
 });
 
 
-// 📄 List All Income Categories
+// List All Income Categories
 router.get("/list", async (req, res) => {
   try {
     const data = await IncomeCategory.findAll({
