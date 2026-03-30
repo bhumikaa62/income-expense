@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path')
 const cors= require('cors')
+const PORT = process.env.PORT || 8989;
 
 const webRouter = require('./routers/WebRouter');
 const incomeRouter = require('./routers/IncomeRouter')
@@ -24,7 +25,6 @@ server.use("/dashboard", dashboardRouter);
 server.use("/income-category", incomeCategoryRouter);
 server.use("/expense-category", expenseCategoryRouter);
 
-const PORT = process.env.PORT || 8989;
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
