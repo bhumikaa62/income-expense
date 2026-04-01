@@ -72,7 +72,8 @@ router.post("/login", async (req, res) => {
       new ApiResponse(true, "Login Success", {
         token: token,
         userId: user.id,       
-        name: user.name       
+        name: user.name,
+         role: user.role    
       })
     )
   }

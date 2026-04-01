@@ -9,7 +9,7 @@ const ExpenseRouter = require('./routers/ExpenseRouter')
 const dashboardRouter = require('./routers/DashboardRouter');
 const incomeCategoryRouter = require("./routers/incomeCategoryRouter");
 const expenseCategoryRouter = require("./routers/expenseCategoryRouter");
-
+const adminRouter = require('./routers/AdminRouter');
 
 
 
@@ -24,13 +24,13 @@ server.use("/expense",ExpenseRouter)
 server.use("/dashboard", dashboardRouter);
 server.use("/income-category", incomeCategoryRouter);
 server.use("/expense-category", expenseCategoryRouter);
+server.use("/admin", adminRouter);
 
-
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
 
 server.get("/", (req, res) => {
   res.send("Backend is running 🚀");
 });
 
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

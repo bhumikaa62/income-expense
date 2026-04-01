@@ -8,7 +8,8 @@ function generateToken(user)   // ✅ parameter change
     const token = jwt.sign(
         {
             id: user.id,       // ✅ now valid
-            email: user.email
+            email: user.email,
+            role: user.role 
         },
         secret,
         { expiresIn: expiry }
