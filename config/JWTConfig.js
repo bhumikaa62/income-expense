@@ -1,31 +1,31 @@
-const jwt = require('jsonwebtoken')
+require("dotenv").config();
 
-const expiry = "1h";
-const secret = "bdc5e2b2-9563-4398-874a-7e5e68276750";
+const jwt = require('jsonwebtoken');
 
-function generateToken(user)   // ✅ parameter change
-{
-    const token = jwt.sign(
+const expiry = process.env.JWT_EXPIRES_IN || "1h";
+const secret = process.env.JWT_SECRET;
+
+if (!secret) {
+    throw new Error("JWT_SECRET is not defined in .env");
+}
+
+function generateToken(user) {
+    return jwt.sign(
         {
-            id: user.id,       // ✅ now valid
+            id: user.id,
             email: user.email,
-            role: user.role 
+            role: user.role
         },
         secret,
         { expiresIn: expiry }
-    );  
-
-    return token;    
+    );
 }
 
-function verifyToken(token, callback)
-{
+function verifyToken(token, callback) {
     jwt.verify(token, secret, (err, tokenData) => {
-        if (err)
-            callback(err, null);
-        else
-            callback(null, tokenData)
-    })
+        if (err) return callback(err, null);
+        return callback(null, tokenData);
+    });
 }
 
-module.exports = { generateToken, verifyToken }
+module.exports = { generateToken, verifyToken };
