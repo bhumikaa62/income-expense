@@ -10,11 +10,20 @@ const dashboardRouter = require('./routers/DashboardRouter');
 const incomeCategoryRouter = require("./routers/incomeCategoryRouter");
 const expenseCategoryRouter = require("./routers/expenseCategoryRouter");
 const adminRouter = require('./routers/AdminRouter');
-
-
-
-
 const server = express();
+
+const sequelize = require("./db");
+
+sequelize.authenticate()
+  .then(() => console.log("DB CONNECTED SUCCESSFULLY ✅"))
+  .catch(err => console.log("DB CONNECTION ERROR ❌", err));
+
+sequelize.sync()
+  .then(() => console.log("Tables synced ✅"))
+  .catch(err => console.log("Sync error ❌", err));
+
+
+
 server.use(cors());
 server.use(express.json());
 
