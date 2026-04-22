@@ -37,6 +37,13 @@ router.get("/list", async (req, res) => {
     res.json(new ApiResponse(false, "Error fetching expense categories", err.message));
   }
 });
-
+router.delete("/expense/:id", auth, isAdmin, async (req, res) => {
+  try {
+    await Expense.destroy({ where: { id: req.params.id } });
+    res.json({ success: true });
+  } catch (err) {
+    res.json({ success: false });
+  }
+});
 
 module.exports = router;

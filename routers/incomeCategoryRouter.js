@@ -38,5 +38,14 @@ router.get("/list", async (req, res) => {
   }
 });
 
+router.delete("/income/:id", auth, isAdmin, async (req, res) => {
+  try {
+    await Income.destroy({ where: { id: req.params.id } });
+    res.json({ success: true });
+  } catch (err) {
+    res.json({ success: false });
+  }
+});
+
 
 module.exports = router;

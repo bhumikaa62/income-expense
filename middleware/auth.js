@@ -2,16 +2,22 @@ const { verifyToken } = require("../config/JWTConfig");
 
 module.exports = (req, res, next) => {
   try {
-    const token = req.headers.authorization;
+    const authHeader = req.headers.authorization;
 
-    if (!token) {
+    console.log("HEADER 👉", authHeader); // 🔥 debug
+
+    if (!authHeader) {
       return res.json({
         success: false,
         message: "No token provided"
       });
     }
 
+    const token = authHeader.split(" ")[1];
+
     verifyToken(token, (err, decoded) => {
+      console.log("DECODED 👉", decoded); // 🔥 debug
+
       if (err) {
         return res.json({
           success: false,
@@ -19,7 +25,7 @@ module.exports = (req, res, next) => {
         });
       }
 
-      req.user = decoded; // 🔥 yaha user set hoga
+      req.user = decoded;
       next();
     });
 
