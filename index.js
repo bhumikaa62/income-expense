@@ -9,7 +9,7 @@ const ExpenseRouter = require('./routers/ExpenseRouter')
 const dashboardRouter = require('./routers/DashboardRouter');
 const incomeCategoryRouter = require("./routers/incomeCategoryRouter");
 const expenseCategoryRouter = require("./routers/expenseCategoryRouter");
-const adminRouter = require('./routers/AdminRouter');
+const AdminRouter = require('./routers/AdminRouter');
 const server = express();
 
 const sequelize = require("./db");
@@ -33,7 +33,7 @@ server.use("/expense",ExpenseRouter)
 server.use("/dashboard", dashboardRouter);
 server.use("/income-category", incomeCategoryRouter);
 server.use("/expense-category", expenseCategoryRouter);
-server.use("/admin", adminRouter);
+server.use("/admin", AdminRouter);
 
 
 server.get("/", (req, res) => {
