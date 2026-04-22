@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const auth = require("../middleware/auth"); // 🔥 ADD THIS
+const auth = require("../middleware/auth"); 
 const db = require("../models"); // sequelize
 const isAdmin = require("../middleware/isAdmin");
 

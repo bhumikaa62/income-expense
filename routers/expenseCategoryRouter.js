@@ -2,8 +2,11 @@ const router = require("express").Router();
 const { ExpenseCategory } = require("../models");
 const ApiResponse = require("./ApiResponse");
 
+const auth = require("../middleware/auth");
+const isAdmin = require("../middleware/isAdmin"); // ✅ ADD
 
-//  Add Expense Category
+
+// Add Expense Category
 router.post("/add", async (req, res) => {
   try {
     const { expense_category_name } = req.body;
@@ -18,13 +21,12 @@ router.post("/add", async (req, res) => {
 
     res.json(new ApiResponse(true, "Expense category added", data));
   } catch (err) {
-    console.log(err);
     res.json(new ApiResponse(false, "Error adding expense category", err.message));
   }
 });
 
 
-//  List All Expense Categories
+// List All Expense Categories
 router.get("/list", async (req, res) => {
   try {
     const data = await ExpenseCategory.findAll({
@@ -33,16 +35,18 @@ router.get("/list", async (req, res) => {
 
     res.json(new ApiResponse(true, "Expense categories fetched", data));
   } catch (err) {
-    console.log(err);
     res.json(new ApiResponse(false, "Error fetching expense categories", err.message));
   }
 });
-router.delete("/expense/:id", auth, isAdmin, async (req, res) => {
+
+
+// ✅ DELETE CATEGORY (FIXED)
+router.delete("/:id", auth, isAdmin, async (req, res) => {
   try {
-    await Expense.destroy({ where: { id: req.params.id } });
+    await ExpenseCategory.destroy({ where: { id: req.params.id } });
     res.json({ success: true });
   } catch (err) {
-    res.json({ success: false });
+    res.json({ success: false, message: err.message });
   }
 });
 
